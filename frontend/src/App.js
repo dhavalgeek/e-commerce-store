@@ -1,10 +1,9 @@
 import './App.css';
-import ProductList from './components/product-list';
-import db from './database';
+import Home from './pages/home';
 
 function App() {
 	return (
-		<ProductList products={db.products} />
+		<Home />
 	);
 }
 
