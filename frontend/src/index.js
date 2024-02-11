@@ -4,20 +4,48 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { configureStore } from '@reduxjs/toolkit';
-import { productReducer } from './reducers';
+import {
+	cartReducer,
+	orderReducer,
+	productReducer,
+	userReducer
+} from './reducers';
 import { Provider } from 'react-redux';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './pages/home';
+import CartPage from './pages/cartPage';
+import CheckoutPage from './pages/checkoutPage';
+import OrdersPage from './pages/ordersPage';
+import ProductDetailsPage from './pages/productDetailsPage';
 
 const store = configureStore({
 	reducer: {
-		product: productReducer
+		product: productReducer,
+		cart: cartReducer,
+		order: orderReducer,
+		user: userReducer
 	}
-})
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<App />
+			<BrowserRouter>
+				<Routes>
+					<Route path='/' element={<App />}>
+						<Route index element={<Home />} />
+						<Route path='cart' element={<CartPage />} />
+						<Route path='checkout' element={<CheckoutPage />} />
+						<Route path='myorders' element={<OrdersPage />} />
+						<Route
+							path='product/:id'
+							element={<ProductDetailsPage />}
+						/>
+					</Route>
+				</Routes>
+			</BrowserRouter>
+			{/* <App /> */}
 		</Provider>
 	</React.StrictMode>
 );
