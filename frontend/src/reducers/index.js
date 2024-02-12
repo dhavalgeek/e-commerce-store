@@ -6,6 +6,7 @@ import {
 	EMPTY_CART,
 	INIT_CART,
 	INIT_PRODUCTS,
+	INIT_USER,
 	PLACE_ORDER,
 	REMOVE_ITEM,
 	SET_SHIP_ADDRESS
@@ -32,33 +33,33 @@ const initialStateUser = {
 	name: 'John',
 	email: 'john@mail.com',
 	addresses: [
-		{
-			first_name: 'John',
-			last_name: 'Doe',
-			address1: 'ABCD',
-			address2: 'XYZ',
-			country: 'India',
-			state: 'Gujarat',
-			pin_code: 100101,
-			phone: '+91 0987654321'
-		},
-		{
-			first_name: 'John',
-			last_name: 'SMITH',
-			address1: 'DEFG',
-			address2: 'XYZ',
-			country: 'India',
-			state: 'Gujarat',
-			pin_code: 700707,
-			phone: '+91 1234567890'
-		}
+		// {
+		// 	first_name: 'John',
+		// 	last_name: 'Doe',
+		// 	address1: 'ABCD',
+		// 	address2: 'XYZ',
+		// 	country: 'India',
+		// 	state: 'Gujarat',
+		// 	pin_code: 100101,
+		// 	phone: '+91 0987654321'
+		// },
+		// {
+		// 	first_name: 'John',
+		// 	last_name: 'SMITH',
+		// 	address1: 'DEFG',
+		// 	address2: 'XYZ',
+		// 	country: 'India',
+		// 	state: 'Gujarat',
+		// 	pin_code: 700707,
+		// 	phone: '+91 1234567890'
+		// }
 	],
 	orders: []
 };
 
 const productReducer = (state = initialStateProduct, action) => {
 	switch (action.type) {
-		case INIT_PRODUCTS: 
+		case INIT_PRODUCTS:
 			return { ...state, products: action.payload };
 		default:
 			return state;
@@ -67,6 +68,12 @@ const productReducer = (state = initialStateProduct, action) => {
 
 const cartReducer = (state = initialStateCart, action) => {
 	switch (action.type) {
+		case INIT_CART:
+			return {
+				...state,
+				items: action.payload.items,
+				userId: action.payload.userId
+			};
 		case CHANGE_ITEM_IN_CART:
 			// if (state.items.find((item) => item._id === action.payload._id)) {
 			// 	return state;
@@ -96,8 +103,8 @@ const cartReducer = (state = initialStateCart, action) => {
 			itemsArray.splice(rIndex, 1);
 
 			return { ...state, items: itemsArray };
-		case EMPTY_CART:
-			return initialStateCart;
+		// case EMPTY_CART:
+		// 	return initialStateCart;
 		default:
 			return state;
 	}
@@ -130,6 +137,8 @@ const orderReducer = (state = initialStateOrder, action) => {
 
 const userReducer = (state = initialStateUser, action) => {
 	switch (action.type) {
+		case INIT_USER:
+			return action.payload;
 		case ADD_ADDRESS:
 			return {
 				...state,

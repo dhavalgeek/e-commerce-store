@@ -2,7 +2,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProductList from '../components/product-list';
 import Navbar from '../components/navbar';
 import Carousel from '../components/carousel';
-import { CHANGE_ITEM_IN_CART, addToCartAC, initializeCartAC, initializeProductsAC } from '../actions';
+import {
+	CHANGE_ITEM_IN_CART,
+	addToCartAC,
+	initializeCartAC,
+	initializeProductsAC,
+	initializeUserAC
+} from '../actions';
 import Footer from '../components/footer';
 import { useEffect } from 'react';
 
@@ -16,8 +22,9 @@ const Home = () => {
 	};
 
 	useEffect(() => {
+		dispatch(initializeUserAC());
 		dispatch(initializeProductsAC());
-		dispatch(initializeCartAC());
+		// dispatch(initializeCartAC());
 	}, []);
 
 	return (

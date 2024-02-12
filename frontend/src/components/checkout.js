@@ -27,6 +27,8 @@ const Checkout = ({ order, user, addAddress, setShipAddress, placeOrder }) => {
 		setAddress(initialAddress);
 	};
 
+	console.log(user);
+
 	return (
 		<div className='container mb-5'>
 			<main>
