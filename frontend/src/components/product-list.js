@@ -7,12 +7,12 @@ const ProductList = ({ products, addToCart }) => {
 				{products.map((product, index) => (
 					<div
 						className='col-xl-3 col-lg-4 col-md-6 position-relative'
-						key={index + product.id}
+						key={index + product._id}
 					>
 						<div className='card product-item'>
 							<i className='bi bi-heart-fill position-absolute liked'></i>
 							<i className='bi bi-heart position-absolute like'></i>
-							<Link to={`/product/${product.id}`}>
+							<Link to={`/product/${product._id}`}>
 								<img
 									src={`/images/${product.image}.jpg`}
 									className='card-img-top'

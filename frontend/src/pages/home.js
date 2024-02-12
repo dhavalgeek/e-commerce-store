@@ -2,8 +2,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProductList from '../components/product-list';
 import Navbar from '../components/navbar';
 import Carousel from '../components/carousel';
-import { ADD_TO_CART, addToCartAC } from '../actions';
+import { CHANGE_ITEM_IN_CART, addToCartAC, initializeCartAC, initializeProductsAC } from '../actions';
 import Footer from '../components/footer';
+import { useEffect } from 'react';
 
 const Home = () => {
 	const dispatch = useDispatch();
@@ -13,6 +14,11 @@ const Home = () => {
 	const addToCart = (product) => {
 		dispatch(addToCartAC(product));
 	};
+
+	useEffect(() => {
+		dispatch(initializeProductsAC());
+		dispatch(initializeCartAC());
+	}, []);
 
 	return (
 		<>

@@ -1,65 +1,18 @@
 import {
 	ADD_ADDRESS,
-	ADD_TO_CART,
+	CHANGE_ITEM_IN_CART,
 	CHANGE_ORDER_CART,
 	CHANGE_QUANTITY,
 	EMPTY_CART,
+	INIT_CART,
+	INIT_PRODUCTS,
 	PLACE_ORDER,
 	REMOVE_ITEM,
 	SET_SHIP_ADDRESS
 } from '../actions';
 
 const initialStateProduct = {
-	products: [
-		{
-			id: 1,
-			name: 'Sony WX-5',
-			category: 'Headphones',
-			price: 100.75,
-			rating: 3,
-			color: 'black',
-			size: 'S',
-			details: {
-				product: '',
-				warranty: '',
-				merchant: ''
-			},
-			image: 'product-1-square',
-			images: ['product-1', 'product-1-2', 'product-1-3']
-		},
-		{
-			id: 2,
-			name: 'Apple Watch 2',
-			category: 'SmartWatch',
-			price: 500.75,
-			rating: 4,
-			color: 'red',
-			size: '',
-			details: {
-				product: '',
-				warranty: '',
-				merchant: ''
-			},
-			image: 'product-2-square',
-			images: ['product-2', 'product-2-2', 'product-2-3']
-		},
-		{
-			id: 3,
-			name: 'Canon WM-5',
-			category: 'Camera',
-			price: 300.75,
-			rating: 5,
-			color: 'green',
-			size: '',
-			details: {
-				product: '',
-				warranty: '',
-				merchant: ''
-			},
-			image: 'product-3-square',
-			images: ['product-3', 'product-3-2', 'product-3-3']
-		}
-	]
+	products: []
 };
 
 const initialStateCart = {
@@ -104,31 +57,41 @@ const initialStateUser = {
 };
 
 const productReducer = (state = initialStateProduct, action) => {
-	return state;
+	switch (action.type) {
+		case INIT_PRODUCTS: 
+			return { ...state, products: action.payload };
+		default:
+			return state;
+	}
 };
 
 const cartReducer = (state = initialStateCart, action) => {
 	switch (action.type) {
-		case ADD_TO_CART:
-			if (state.items.find((item) => item.id === action.payload.id)) {
-				return state;
-			}
+		case CHANGE_ITEM_IN_CART:
+			// if (state.items.find((item) => item._id === action.payload._id)) {
+			// 	return state;
+			// }
 			return {
 				...state,
-				items: [...state.items, { ...action.payload, quantity: 1 }]
+				items: action.payload.items
 			};
-		case CHANGE_QUANTITY:
-			const oldItem = state.items.find(
-				(item) => item.id === action.payload.id
-			);
-			const index = state.items.indexOf(oldItem);
-			const newItems = [...state.items];
-			newItems[index] = action.payload;
+		// case INIT_CART:
+		// 	return {
+		// 		...state,
+		// 		items: action.payload.items
+		// 	};
+		// case CHANGE_QUANTITY:
+		// 	const oldItem = state.items.find(
+		// 		(item) => item._id === action.payload._id
+		// 	);
+		// 	const index = state.items.indexOf(oldItem);
+		// 	const newItems = [...state.items];
+		// 	newItems[index] = action.payload;
 
-			return { ...state, items: newItems };
+		// 	return { ...state, items: newItems };
 		case REMOVE_ITEM:
 			const item = action.payload;
-			const rIndex = state.items.findIndex((el) => el.id === item.id);
+			const rIndex = state.items.findIndex((el) => el._id === item._id);
 			const itemsArray = [...state.items];
 			itemsArray.splice(rIndex, 1);
 

@@ -1,4 +1,6 @@
-export const ADD_TO_CART = 'ADD_TO_CART';
+import axios from 'axios';
+
+export const CHANGE_ITEM_IN_CART = 'CHANGE_ITEM_IN_CART';
 export const CHANGE_ORDER_CART = 'CHANGE_ORDER_CART';
 export const CHANGE_QUANTITY = 'CHANGE_QUANTITY';
 export const ADD_ADDRESS = 'ADD_ADDRESS';
@@ -6,10 +8,52 @@ export const SET_SHIP_ADDRESS = 'SET_SHIP_ADDRESS';
 export const PLACE_ORDER = 'PLACE_ORDER';
 export const EMPTY_CART = 'EMPTY_CART';
 export const REMOVE_ITEM = 'REMOVE_ITEM';
+export const INIT_PRODUCTS = 'INIT_PRODUCTS';
+export const INIT_CART = 'INIT_CART';
+
+const changeCart = async (dispatch, product) => {
+	let products = [];
+	try {
+		const response = await axios.post('http://localhost:8080/cart', { item: product });
+		products = response.data.data;
+	} catch (error) {
+		console.error(error);
+	}
+	
+	dispatch({ type: CHANGE_ITEM_IN_CART, payload: products });
+}
+
+export const initializeProductsAC = () => {
+	return async function (dispatch) {
+		let products = [];
+		try {
+			const response = await axios.get('http://localhost:8080/product');
+			products = response.data.data
+		} catch (error) {
+			console.error(error);
+		}
+		
+		dispatch({ type: INIT_PRODUCTS, payload: products });
+	};
+};
+
+export const initializeCartAC = () => {
+	return async function (dispatch) {
+		let cart = [];
+		try {
+			const response = await axios.get('http://localhost:8080/cart');
+			cart = response.data.data;
+		} catch (error) {
+			console.error(error);
+		}
+		
+		dispatch({ type: CHANGE_ITEM_IN_CART, payload: cart });
+	};
+};
 
 export const addToCartAC = (product) => {
-	return function (dispatch) {
-		dispatch({ type: ADD_TO_CART, payload: product });
+	return async function (dispatch) {
+		changeCart(dispatch, product);
 	};
 	// dispatch(addToCartAC(product));
 };
@@ -21,8 +65,9 @@ export const changeOrderWithCart = (cartItems) => {
 };
 
 export const changeQuantityAC = (quantity, item) => {
-	return function (dispatch) {
-		dispatch({ type: CHANGE_QUANTITY, payload: { ...item, quantity } });
+	return async function (dispatch) {
+		await changeCart(dispatch, { ...item, quantity });
+		// dispatch({ type: CHANGE_QUANTITY, payload: { ...item, quantity } });
 	};
 };
 
@@ -51,7 +96,17 @@ export const emptyCartAC = () => {
 };
 
 export const removeItemAC = (item) => {
-	return function (dispatch) {
-		dispatch({ type: REMOVE_ITEM, payload: item });
+	return async function (dispatch) {
+		let cart = [];
+		try {
+			const response = await axios.delete('http://localhost:8080/cart/' + item._id);
+			cart = response.data.data;
+		} catch (error) {
+			console.error(error);
+		}
+		
+		dispatch({ type: CHANGE_ITEM_IN_CART, payload: cart });
+
+		// dispatch({ type: REMOVE_ITEM, payload: item });
 	};
 };
