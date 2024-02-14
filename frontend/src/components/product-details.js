@@ -1,7 +1,6 @@
 import React from 'react';
 
 const ProductDetails = ({ product, addToCart }) => {
-	console.log(product);
 	return (
 		<div className='container mb-5 mt-5'>
 			<div className='row d-flex flex-row'>
@@ -24,13 +23,9 @@ const ProductDetails = ({ product, addToCart }) => {
 				</div>
 
 				<div className='col-md-5'>
-					<h6 className='text-uppercase text-secondary'>
-						{product.name}
-					</h6>
+					<h6 className='text-uppercase text-secondary'>{product.name}</h6>
 					<h2 className='fs-3'>{product.category}</h2>
-					<h5 className='text-secondary fs-6 fw-bold'>
-						${product.price}
-					</h5>
+					<h5 className='text-secondary fs-6 fw-bold'>${product.price}</h5>
 					<div className='text-secondary text-small'>color :</div>
 					<div className='my-2'>
 						<div
@@ -79,10 +74,7 @@ const ProductDetails = ({ product, addToCart }) => {
 										autocomplete='off'
 										checked={el === product.size}
 									/>
-									<label
-										className='btn btn-outline-dark'
-										for={'btnradio' + el}
-									>
+									<label className='btn btn-outline-dark' for={'btnradio' + el}>
 										{el}
 									</label>
 								</React.Fragment>
@@ -98,19 +90,11 @@ const ProductDetails = ({ product, addToCart }) => {
 						Add to Cart{' '}
 					</button>
 					<div>
-						<span className='text-secondary text-small'>
-							Details :
-						</span>
+						<span className='text-secondary text-small'>Details :</span>
 
-						<div
-							className='accordion accordion-flush'
-							id='accordionExample'
-						>
+						<div className='accordion accordion-flush' id='accordionExample'>
 							<div className='accordion-item'>
-								<h2
-									className='accordion-header'
-									id='headingOne'
-								>
+								<h2 className='accordion-header' id='headingOne'>
 									<button
 										className='accordion-button'
 										type='button'
@@ -129,30 +113,20 @@ const ProductDetails = ({ product, addToCart }) => {
 									data-bs-parent='#accordionExample'
 								>
 									<div className='accordion-body'>
-										<strong>
-											This is the first item's accordion
-											body.
-										</strong>{' '}
-										It is hidden by default, until the
-										collapse plugin adds the appropriate
-										classes that we use to style each
-										element. These classes control the
-										overall appearance, as well as the
-										showing and hiding via CSS transitions.
-										You can modify any of this with custom
-										CSS or overriding our default variables.
-										It's also worth noting that just about
-										any HTML can go within the{' '}
-										<code>.accordion-body</code>, though the
+										<strong>This is the first item's accordion body.</strong> It
+										is hidden by default, until the collapse plugin adds the
+										appropriate classes that we use to style each element. These
+										classes control the overall appearance, as well as the
+										showing and hiding via CSS transitions. You can modify any
+										of this with custom CSS or overriding our default variables.
+										It's also worth noting that just about any HTML can go
+										within the <code>.accordion-body</code>, though the
 										transition does limit overflow.
 									</div>
 								</div>
 							</div>
 							<div className='accordion-item'>
-								<h2
-									className='accordion-header'
-									id='headingTwo'
-								>
+								<h2 className='accordion-header' id='headingTwo'>
 									<button
 										className='accordion-button collapsed'
 										type='button'
@@ -171,30 +145,20 @@ const ProductDetails = ({ product, addToCart }) => {
 									data-bs-parent='#accordionExample'
 								>
 									<div className='accordion-body'>
-										<strong>
-											This is the second item's accordion
-											body.
-										</strong>{' '}
-										It is hidden by default, until the
-										collapse plugin adds the appropriate
-										classes that we use to style each
-										element. These classes control the
-										overall appearance, as well as the
-										showing and hiding via CSS transitions.
-										You can modify any of this with custom
-										CSS or overriding our default variables.
-										It's also worth noting that just about
-										any HTML can go within the{' '}
-										<code>.accordion-body</code>, though the
+										<strong>This is the second item's accordion body.</strong>{' '}
+										It is hidden by default, until the collapse plugin adds the
+										appropriate classes that we use to style each element. These
+										classes control the overall appearance, as well as the
+										showing and hiding via CSS transitions. You can modify any
+										of this with custom CSS or overriding our default variables.
+										It's also worth noting that just about any HTML can go
+										within the <code>.accordion-body</code>, though the
 										transition does limit overflow.
 									</div>
 								</div>
 							</div>
 							<div className='accordion-item'>
-								<h2
-									className='accordion-header'
-									id='headingThree'
-								>
+								<h2 className='accordion-header' id='headingThree'>
 									<button
 										className='accordion-button collapsed'
 										type='button'
@@ -213,21 +177,14 @@ const ProductDetails = ({ product, addToCart }) => {
 									data-bs-parent='#accordionExample'
 								>
 									<div className='accordion-body'>
-										<strong>
-											This is the third item's accordion
-											body.
-										</strong>{' '}
-										It is hidden by default, until the
-										collapse plugin adds the appropriate
-										classes that we use to style each
-										element. These classes control the
-										overall appearance, as well as the
-										showing and hiding via CSS transitions.
-										You can modify any of this with custom
-										CSS or overriding our default variables.
-										It's also worth noting that just about
-										any HTML can go within the{' '}
-										<code>.accordion-body</code>, though the
+										<strong>This is the third item's accordion body.</strong> It
+										is hidden by default, until the collapse plugin adds the
+										appropriate classes that we use to style each element. These
+										classes control the overall appearance, as well as the
+										showing and hiding via CSS transitions. You can modify any
+										of this with custom CSS or overriding our default variables.
+										It's also worth noting that just about any HTML can go
+										within the <code>.accordion-body</code>, though the
 										transition does limit overflow.
 									</div>
 								</div>

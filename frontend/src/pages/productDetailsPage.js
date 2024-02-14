@@ -17,8 +17,6 @@ const ProductDetailsPage = () => {
 		// dispatch({ type: CHANGE_ITEM_IN_CART, payload: product });
 	};
 
-	console.log(product);
-
 	return (
 		<>
 			<Navbar cartCount={cartItems.length} />

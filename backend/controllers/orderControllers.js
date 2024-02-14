@@ -1,14 +1,22 @@
+const Order = require('../models/orderModel');
+const User = require('../models/userModel');
+
 const placeOrder = async (req, res) => {
 	try {
-		const userId = '65ca49d62e48dc4ba71cd022';
-		const order = request.body.order;
-		const updateOrder = await User.findOne({ userId });
-		await updateOrder.orders.push(order);
-		const updated = await updateOrder.save();
+		const userId = '65cca5f09dcd3d717f60472a'; // '65ca49d62e48dc4ba71cd022';
+		const order = req.body.order;
 
-		return res
-			.status(200)
-			.json({ message: 'User created successfully..', data: updated });
+		let newOrder = new Order(order);
+		newOrder = await newOrder.save();
+
+		const userOrders = await User.findById(userId);
+		userOrders.orders.push(newOrder._id);
+		await userOrders.save();
+
+		return res.status(200).json({
+			message: 'User created successfully..',
+			data: order
+		});
 	} catch (error) {
 		console.error('Error occured while creating user: ', error);
 		return res.status(500).json({ message: error.message });

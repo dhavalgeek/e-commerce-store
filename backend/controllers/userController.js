@@ -2,7 +2,7 @@ const User = require('../models/userModel');
 
 const getUser = async (req, res) => {
 	try {
-		const user = await User.findOne({});
+		const user = await User.findOne({}).populate('orders');
 
 		return res
 			.status(200)
@@ -36,15 +36,17 @@ const createUser = async (req, res) => {
 
 const updateUserAddress = async (req, res) => {
 	try {
-		const userId = '65ca49d62e48dc4ba71cd022';
-		const address = request.body.address;
-		const updateAddress = await User.findOne({ userId });
-		await updateAddress.addresses.push(address);
-		const updated = await updateAddress.save();
+		const userId = '65cca5f09dcd3d717f60472a'; // '65ca49d62e48dc4ba71cd022';
+		const address = req.body.address;
+		const user = await User.findById(userId);
+		console.log(user.addresses, address);
+
+		user.addresses.push(address);
+		const updated = await user.save();
 
 		return res
 			.status(200)
-			.json({ message: 'User created successfully..', data: updated });
+			.json({ message: 'User created successfully..', data: address });
 	} catch (error) {
 		console.error('Error occured while creating user: ', error);
 		return res.status(500).json({ message: error.message });

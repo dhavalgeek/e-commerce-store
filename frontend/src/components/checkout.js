@@ -27,8 +27,6 @@ const Checkout = ({ order, user, addAddress, setShipAddress, placeOrder }) => {
 		setAddress(initialAddress);
 	};
 
-	console.log(user);
-
 	return (
 		<div className='container mb-5'>
 			<main>
@@ -48,39 +46,27 @@ const Checkout = ({ order, user, addAddress, setShipAddress, placeOrder }) => {
 							<li className='list-group-item d-flex justify-content-between lh-sm'>
 								<div>
 									<h6 className='my-0'>Total</h6>
-									<small className='text-muted'>
-										Cart Items
-									</small>
+									<small className='text-muted'>Cart Items</small>
 								</div>
-								<span className='text-muted'>
-									${order.total_cost}
-								</span>
+								<span className='text-muted'>${order.total_cost}</span>
 							</li>
 
 							<li className='list-group-item d-flex justify-content-between lh-sm'>
 								<div>
 									<h6 className='my-0'>Total</h6>
-									<small className='text-muted'>
-										Shipping Charges
-									</small>
+									<small className='text-muted'>Shipping Charges</small>
 								</div>
-								<span className='text-muted'>
-									${order.shipping_charge}
-								</span>
+								<span className='text-muted'>${order.shipping_charge}</span>
 							</li>
 
 							<li className='list-group-item d-flex justify-content-between lh-sm'>
 								<div>
 									<h6 className='my-0'>Total</h6>
-									<small className='text-muted'>
-										Discount
-									</small>
+									<small className='text-muted'>Discount</small>
 								</div>
 								<span className='text-muted'>
 									-$
-									{(order.total_cost *
-										order.discount_in_percent) /
-										100}
+									{(order.total_cost * order.discount_in_percent) / 100}
 								</span>
 							</li>
 
@@ -89,9 +75,7 @@ const Checkout = ({ order, user, addAddress, setShipAddress, placeOrder }) => {
 								<strong>
 									$
 									{order.total_cost -
-										(order.total_cost *
-											order.discount_in_percent) /
-											100 +
+										(order.total_cost * order.discount_in_percent) / 100 +
 										order.shipping_charge}
 								</strong>
 							</li>
@@ -111,16 +95,13 @@ const Checkout = ({ order, user, addAddress, setShipAddress, placeOrder }) => {
 										{order.shipping_address.country},{' '}
 										{order.shipping_address.pin_code}
 									</h6>
-									<p className='card-text'>
-										{order.shipping_address.phone}
-									</p>
+									<p className='card-text'>{order.shipping_address.phone}</p>
 								</div>
 							</div>
 						)}
 					</div>
 					<div className='col-md-7 col-lg-8'>
 						<h4 className='mb-3'>Shipping address</h4>
-
 						{user.addresses.map((address, index) => (
 							<div className='card' key={index}>
 								<div className='card-body'>
@@ -128,9 +109,8 @@ const Checkout = ({ order, user, addAddress, setShipAddress, placeOrder }) => {
 										{address.first_name} {address.last_name}
 									</h5>
 									<h6 className='card-subtitle mb-2 text-muted '>
-										{address.address1}, {address.address2},{' '}
-										{address.state}, {address.country},{' '}
-										{address.pin_code}
+										{address.address1}, {address.address2}, {address.state},{' '}
+										{address.country}, {address.pin_code}
 									</h6>
 									<p className='card-text'>{address.phone}</p>
 									<input
@@ -139,18 +119,13 @@ const Checkout = ({ order, user, addAddress, setShipAddress, placeOrder }) => {
 										id={index}
 										onClick={() => setShipAddress(address)}
 									/>
-									<label htmlFor={index}>
-										&nbsp;Use this Address
-									</label>
+									<label htmlFor={index}>&nbsp;Use this Address</label>
 								</div>
 							</div>
 						))}
-
 						<hr className='my-4' />
 						<h5>OR</h5>
-
 						<h4 className='mb-3'>Add New Address</h4>
-
 						<form
 							className='needs-validation'
 							noValidate=''
@@ -161,10 +136,7 @@ const Checkout = ({ order, user, addAddress, setShipAddress, placeOrder }) => {
 						>
 							<div className='row g-3'>
 								<div className='col-sm-6'>
-									<label
-										htmlFor='firstName'
-										className='form-label'
-									>
+									<label htmlFor='firstName' className='form-label'>
 										First name
 									</label>
 									<input
@@ -174,10 +146,7 @@ const Checkout = ({ order, user, addAddress, setShipAddress, placeOrder }) => {
 										placeholder=''
 										value={address.first_name}
 										onChange={(e) =>
-											handleAddressChange(
-												'first_name',
-												e.target.value
-											)
+											handleAddressChange('first_name', e.target.value)
 										}
 									/>
 									<div className='invalid-feedback'>
@@ -186,10 +155,7 @@ const Checkout = ({ order, user, addAddress, setShipAddress, placeOrder }) => {
 								</div>
 
 								<div className='col-sm-6'>
-									<label
-										htmlFor='lastName'
-										className='form-label'
-									>
+									<label htmlFor='lastName' className='form-label'>
 										Last name
 									</label>
 									<input
@@ -199,10 +165,7 @@ const Checkout = ({ order, user, addAddress, setShipAddress, placeOrder }) => {
 										placeholder=''
 										value={address.last_name}
 										onChange={(e) =>
-											handleAddressChange(
-												'last_name',
-												e.target.value
-											)
+											handleAddressChange('last_name', e.target.value)
 										}
 									/>
 									<div className='invalid-feedback'>
@@ -211,12 +174,8 @@ const Checkout = ({ order, user, addAddress, setShipAddress, placeOrder }) => {
 								</div>
 
 								<div className='col-12'>
-									<label
-										htmlFor='phone'
-										className='form-label'
-									>
-										Phone{' '}
-										<span className='text-muted'></span>
+									<label htmlFor='phone' className='form-label'>
+										Phone <span className='text-muted'></span>
 									</label>
 									<input
 										type='tel'
@@ -225,23 +184,16 @@ const Checkout = ({ order, user, addAddress, setShipAddress, placeOrder }) => {
 										placeholder='+91-1111111111'
 										value={address.phone}
 										onChange={(e) =>
-											handleAddressChange(
-												'phone',
-												e.target.value
-											)
+											handleAddressChange('phone', e.target.value)
 										}
 									/>
 									<div className='invalid-feedback'>
-										Please enter a valid phone for shipping
-										updates.
+										Please enter a valid phone for shipping updates.
 									</div>
 								</div>
 
 								<div className='col-12'>
-									<label
-										htmlFor='address'
-										className='form-label'
-									>
+									<label htmlFor='address' className='form-label'>
 										Address
 									</label>
 									<input
@@ -251,10 +203,7 @@ const Checkout = ({ order, user, addAddress, setShipAddress, placeOrder }) => {
 										placeholder='1234 Main St'
 										value={address.address1}
 										onChange={(e) =>
-											handleAddressChange(
-												'address1',
-												e.target.value
-											)
+											handleAddressChange('address1', e.target.value)
 										}
 									/>
 									<div className='invalid-feedback'>
@@ -263,14 +212,8 @@ const Checkout = ({ order, user, addAddress, setShipAddress, placeOrder }) => {
 								</div>
 
 								<div className='col-12'>
-									<label
-										htmlFor='address2'
-										className='form-label'
-									>
-										Address 2{' '}
-										<span className='text-muted'>
-											(Optional)
-										</span>
+									<label htmlFor='address2' className='form-label'>
+										Address 2 <span className='text-muted'>(Optional)</span>
 									</label>
 									<input
 										type='text'
@@ -279,19 +222,13 @@ const Checkout = ({ order, user, addAddress, setShipAddress, placeOrder }) => {
 										placeholder='Apartment or suite'
 										value={address.address2}
 										onChange={(e) =>
-											handleAddressChange(
-												'address2',
-												e.target.value
-											)
+											handleAddressChange('address2', e.target.value)
 										}
 									/>
 								</div>
 
 								<div className='col-md-5'>
-									<label
-										htmlFor='country'
-										className='form-label'
-									>
+									<label htmlFor='country' className='form-label'>
 										Country
 									</label>
 									<select
@@ -299,10 +236,7 @@ const Checkout = ({ order, user, addAddress, setShipAddress, placeOrder }) => {
 										id='country'
 										value={address.country}
 										onChange={(e) =>
-											handleAddressChange(
-												'country',
-												e.target.value
-											)
+											handleAddressChange('country', e.target.value)
 										}
 									>
 										<option value=''>Choose...</option>
@@ -314,10 +248,7 @@ const Checkout = ({ order, user, addAddress, setShipAddress, placeOrder }) => {
 								</div>
 
 								<div className='col-md-4'>
-									<label
-										htmlFor='state'
-										className='form-label'
-									>
+									<label htmlFor='state' className='form-label'>
 										State
 									</label>
 									<select
@@ -325,10 +256,7 @@ const Checkout = ({ order, user, addAddress, setShipAddress, placeOrder }) => {
 										id='state'
 										value={address.state}
 										onChange={(e) =>
-											handleAddressChange(
-												'state',
-												e.target.value
-											)
+											handleAddressChange('state', e.target.value)
 										}
 									>
 										<option value=''>Choose...</option>
@@ -353,24 +281,16 @@ const Checkout = ({ order, user, addAddress, setShipAddress, placeOrder }) => {
 										placeholder=''
 										value={address.pin_code}
 										onChange={(e) =>
-											handleAddressChange(
-												'pin_code',
-												e.target.value
-											)
+											handleAddressChange('pin_code', e.target.value)
 										}
 									/>
-									<div className='invalid-feedback'>
-										Zip code required.
-									</div>
+									<div className='invalid-feedback'>Zip code required.</div>
 								</div>
 							</div>
 
 							<hr className='my-4' />
 
-							<button
-								className='w-100 btn btn-success btn-lg'
-								type='submit'
-							>
+							<button className='w-100 btn btn-success btn-lg' type='submit'>
 								Add Address
 							</button>
 						</form>

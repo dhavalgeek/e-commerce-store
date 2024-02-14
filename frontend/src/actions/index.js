@@ -91,21 +91,19 @@ export const changeQuantityAC = (quantity, item) => {
 
 export const addAddressAC = (address) => {
 	return async function (dispatch) {
-		let response = [];
+		let response = {};
 		try {
-			const response = await axios.delete(
-				'http://localhost:8080/user/address',
-				{ address }
-			);
-			response = response.data.data;
+			const addAddress = await axios.put('http://localhost:8080/user/address', {
+				address
+			});
+
+			response = addAddress.data.data;
 		} catch (error) {
 			console.error(error);
 		}
 
 		dispatch({ type: ADD_ADDRESS, payload: response });
 	};
-
-	// dispatch({ type: ADD_ADDRESS, payload: address });
 };
 
 export const setShipAddressAC = (address) => {
@@ -118,10 +116,11 @@ export const placeOrderAC = (order) => {
 	return async function (dispatch) {
 		let response = [];
 		try {
-			const response = await axios.delete('http://localhost:8080/order', {
+			const userOrders = await axios.post('http://localhost:8080/order', {
 				order
 			});
-			response = response.data.data;
+
+			response = userOrders.data.data;
 		} catch (error) {
 			console.error(error);
 		}
@@ -134,9 +133,7 @@ export const emptyCartAC = () => {
 	return async function (dispatch) {
 		let cart = [];
 		try {
-			const response = await axios.delete(
-				'http://localhost:8080/cart/clear'
-			);
+			const response = await axios.delete('http://localhost:8080/cart/clear');
 			cart = response.data.data;
 		} catch (error) {
 			console.error(error);
