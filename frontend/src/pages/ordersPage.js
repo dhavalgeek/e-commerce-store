@@ -9,8 +9,6 @@ const OrdersPage = () => {
 	const order = useSelector((state) => state.order);
 	const user = useSelector((state) => state.user);
 
-	console.log(order);
-
 	return (
 		<>
 			<Navbar cartCount={cartItems.length} />

@@ -39,7 +39,6 @@ const updateUserAddress = async (req, res) => {
 		const userId = '65cca5f09dcd3d717f60472a'; // '65ca49d62e48dc4ba71cd022';
 		const address = req.body.address;
 		const user = await User.findById(userId);
-		console.log(user.addresses, address);
 
 		user.addresses.push(address);
 		const updated = await user.save();

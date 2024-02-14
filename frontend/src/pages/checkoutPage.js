@@ -28,10 +28,10 @@ const CheckoutPage = () => {
 		dispatch(setShipAddressAC(address));
 	};
 
-	const placeOrder = () => {
+	const placeOrder = async () => {
 		if (order.shipping_address) {
-			dispatch(placeOrderAC(order));
-			dispatch(emptyCartAC());
+			await dispatch(placeOrderAC(order));
+			await dispatch(emptyCartAC());
 		} else {
 			alert('Please select a shipping address');
 		}
