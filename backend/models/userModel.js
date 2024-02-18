@@ -7,10 +7,19 @@ const userSchema = mongoose.Schema(
 			required: true
 		},
 		email: {
-			type: String,
-			required: true
+			type: String
+			// required: true
 		},
-		addresses: [Object],
+		username: {
+			type: String,
+			required: true,
+			unique: true
+		},
+		password: String,
+		addresses: {
+			type: [Object],
+			default: []
+		},
 		orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }]
 	},
 	{ timestamps: true }

@@ -6,8 +6,8 @@ import {
 	CHANGE_ITEM_IN_CART,
 	addToCartAC,
 	initializeCartAC,
-	initializeProductsAC,
-	initializeUserAC
+	initializeProductsAC
+	// initializeUserAC
 } from '../actions';
 import Footer from '../components/footer';
 import { useEffect } from 'react';
@@ -22,7 +22,7 @@ const Home = () => {
 	};
 
 	useEffect(() => {
-		dispatch(initializeUserAC());
+		// dispatch(initializeUserAC());
 		dispatch(initializeProductsAC());
 		// dispatch(initializeCartAC());
 	}, []);

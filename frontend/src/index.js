@@ -4,12 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { configureStore } from '@reduxjs/toolkit';
-import {
-	cartReducer,
-	orderReducer,
-	productReducer,
-	userReducer
-} from './reducers';
+import { cartReducer, orderReducer, productReducer, userReducer } from './reducers';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/home';
@@ -17,6 +12,9 @@ import CartPage from './pages/cartPage';
 import CheckoutPage from './pages/checkoutPage';
 import OrdersPage from './pages/ordersPage';
 import ProductDetailsPage from './pages/productDetailsPage';
+import LoginSignupPage from './pages/loginSignupPage';
+import OrderSuccessPage from './pages/orderSuccessPage';
+import NotFoundPage from './pages/404';
 
 const store = configureStore({
 	reducer: {
@@ -38,10 +36,10 @@ root.render(
 						<Route path='cart' element={<CartPage />} />
 						<Route path='checkout' element={<CheckoutPage />} />
 						<Route path='myorders' element={<OrdersPage />} />
-						<Route
-							path='product/:id'
-							element={<ProductDetailsPage />}
-						/>
+						<Route path='order-success/:order-id' element={<OrderSuccessPage />} />
+						<Route path='login' element={<LoginSignupPage />} />
+						<Route path='product/:id' element={<ProductDetailsPage />} />
+						<Route path='*' element={<NotFoundPage />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>

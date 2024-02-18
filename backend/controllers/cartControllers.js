@@ -1,7 +1,7 @@
 const Cart = require('../models/cartModel');
 
 const addCart = async (req, res) => {
-	const userId = '65cca5f09dcd3d717f60472a'; // '65ca49d62e48dc4ba71cd022';
+	const userId = req.session.user._id; // '65ca49d62e48dc4ba71cd022';
 	const item = req.body.item;
 	if (!item.quantity) {
 		item.quantity = 1;
@@ -25,9 +25,7 @@ const addCart = async (req, res) => {
 		}
 
 		await cart.save();
-		return res
-			.status(200)
-			.json({ message: 'Item added to the cart', data: cart });
+		return res.status(200).json({ message: 'Item added to the cart', data: cart });
 	} catch (error) {
 		console.error('Error while adding item to the cart: ', error);
 		return res.status(500).json({ message: error.message });
@@ -36,7 +34,7 @@ const addCart = async (req, res) => {
 
 const getCart = async (req, res) => {
 	try {
-		const userId = '65cca5f09dcd3d717f60472a'; // '65ca49d62e48dc4ba71cd022';
+		const userId = req.session.user._id; // '65ca49d62e48dc4ba71cd022';
 		const cart = await Cart.findOne({ userId });
 
 		return res.status(200).json({
@@ -54,7 +52,7 @@ const getCart = async (req, res) => {
 
 const deleteCart = async (req, res) => {
 	try {
-		const userId = '65cca5f09dcd3d717f60472a'; // '65ca49d62e48dc4ba71cd022';
+		const userId = req.session.user._id; // '65ca49d62e48dc4ba71cd022';
 		const itemId = req.params.id;
 		let cart = await Cart.findOne({ userId });
 
@@ -79,7 +77,7 @@ const deleteCart = async (req, res) => {
 
 const clearCart = async (req, res) => {
 	try {
-		const userId = '65cca5f09dcd3d717f60472a'; // '65ca49d62e48dc4ba71cd022';
+		const userId = req.session.user._id; // '65ca49d62e48dc4ba71cd022';
 		const cart = await Cart.findOne({ userId });
 		cart.items = [];
 		await cart.save();

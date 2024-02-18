@@ -3,7 +3,7 @@ const User = require('../models/userModel');
 
 const placeOrder = async (req, res) => {
 	try {
-		const userId = '65cca5f09dcd3d717f60472a'; // '65ca49d62e48dc4ba71cd022';
+		const userId = req.session.user._id; // '65ca49d62e48dc4ba71cd022';
 		const order = req.body.order;
 
 		let newOrder = new Order(order);
@@ -15,7 +15,7 @@ const placeOrder = async (req, res) => {
 
 		return res.status(200).json({
 			message: 'User created successfully..',
-			data: order
+			data: newOrder
 		});
 	} catch (error) {
 		console.error('Error occured while creating user: ', error);

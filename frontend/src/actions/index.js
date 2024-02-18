@@ -1,4 +1,5 @@
 import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 export const CHANGE_ITEM_IN_CART = 'CHANGE_ITEM_IN_CART';
 export const CHANGE_ORDER_CART = 'CHANGE_ORDER_CART';
@@ -24,6 +25,65 @@ const changeCart = async (dispatch, product) => {
 	}
 
 	dispatch({ type: CHANGE_ITEM_IN_CART, payload: products });
+};
+
+export const checkAuthAC = (navigate) => {
+	return async function (dispatch) {
+		try {
+			const response = await axios.get('http://localhost:8080/user');
+			const userResponse = response.data.data;
+			dispatch({ type: INIT_USER, payload: userResponse });
+			dispatch(initializeCartAC(userResponse._id));
+			navigate('/');
+		} catch (error) {
+			console.error(error);
+			alert(error.message);
+			navigate('/login');
+		}
+	};
+};
+
+export const loginAC = (user, navigate) => {
+	return async function (dispatch) {
+		try {
+			const response = await axios.post('http://localhost:8080/user/login', { user });
+			const userResponse = response.data.data;
+			dispatch({ type: INIT_USER, payload: userResponse });
+			dispatch(initializeCartAC(userResponse._id));
+			navigate('/');
+		} catch (error) {
+			console.error(error);
+			alert(error.message);
+		}
+	};
+};
+
+export const signupAC = (user, navigate) => {
+	return async function (dispatch) {
+		try {
+			const response = await axios.post('http://localhost:8080/user/signup', { user });
+			const userResponse = response.data.data;
+			dispatch({ type: INIT_USER, payload: userResponse });
+			dispatch(initializeCartAC(userResponse._id));
+			navigate('/');
+		} catch (error) {
+			console.error(error);
+			alert(error.message);
+		}
+	};
+};
+
+export const logoutAC = (navigate) => {
+	return async function (dispatch) {
+		try {
+			await axios.get('http://localhost:8080/user/logout');
+			dispatch({ type: INIT_USER, payload: {} });
+			navigate('/login');
+		} catch (error) {
+			console.error(error);
+			alert(error.message);
+		}
+	};
 };
 
 export const initializeProductsAC = () => {
@@ -54,20 +114,20 @@ export const initializeCartAC = (userId) => {
 	};
 };
 
-export const initializeUserAC = () => {
-	return async function (dispatch) {
-		let user = [];
-		try {
-			const response = await axios.get('http://localhost:8080/user');
-			user = response.data.data;
-		} catch (error) {
-			console.error(error);
-		}
+// export const initializeUserAC = () => {
+// 	return async function (dispatch) {
+// 		let user = [];
+// 		try {
+// 			const response = await axios.get('http://localhost:8080/user');
+// 			user = response.data.data;
+// 		} catch (error) {
+// 			console.error(error);
+// 		}
 
-		dispatch({ type: INIT_USER, payload: user });
-		dispatch(initializeCartAC());
-	};
-};
+// 		dispatch({ type: INIT_USER, payload: user });
+// 		dispatch(initializeCartAC());
+// 	};
+// };
 
 export const addToCartAC = (product) => {
 	return async function (dispatch) {
@@ -112,20 +172,19 @@ export const setShipAddressAC = (address) => {
 	};
 };
 
-export const placeOrderAC = (order) => {
+export const placeOrderAC = (order, navigate) => {
 	return async function (dispatch) {
-		let response = [];
 		try {
 			const userOrders = await axios.post('http://localhost:8080/order', {
 				order
 			});
 
-			response = userOrders.data.data;
+			const response = userOrders.data.data;
+			dispatch({ type: PLACE_ORDER, payload: response });
+			navigate(`/order-success/${response._id}`);
 		} catch (error) {
 			console.error(error);
 		}
-
-		dispatch({ type: PLACE_ORDER, payload: response });
 	};
 };
 
@@ -148,9 +207,7 @@ export const removeItemAC = (item) => {
 	return async function (dispatch) {
 		let cart = [];
 		try {
-			const response = await axios.delete(
-				'http://localhost:8080/cart/' + item._id
-			);
+			const response = await axios.delete('http://localhost:8080/cart/' + item._id);
 			cart = response.data.data;
 		} catch (error) {
 			console.error(error);

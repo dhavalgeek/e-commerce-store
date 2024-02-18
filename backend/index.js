@@ -8,13 +8,28 @@ const orderRouter = require('./routes/orderRoute.js');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 
 const app = express();
 
 dotenv.config();
 
 // Middlewares
-app.use(cors());
+app.use(
+	cors({
+		origin: 'http://localhost:3000',
+		methods: ['GET', 'POST', 'PUT', 'DELETE'],
+		credentials: true
+	})
+);
+app.use(
+	session({
+		secret: 'User Session',
+		resave: false,
+		saveUninitialized: true,
+		cookie: { secure: false }
+	})
+);
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
