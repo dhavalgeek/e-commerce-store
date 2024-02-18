@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Footer from '../components/footer';
 
 const OrderSuccessPage = () => {
@@ -19,7 +19,7 @@ const OrderSuccessPage = () => {
 						<i class='bi bi-check-circle-fill text-success success-icon'></i>
 
 						<h6>We will deliver your order in X days</h6>
-						<a href='/'>Go Back To Home</a>
+						<Link to='/'>Go Back To Home</Link>
 					</div>
 				</div>
 			</div>

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const Footer = () => {
 	return (
 		<div className='footer mt-auto bg-dark text-light'>
@@ -7,19 +9,19 @@ const Footer = () => {
 						<h5>Categories</h5>
 						<ul>
 							<li>
-								<a href='#'>Watches</a>
+								<Link to='/'>Watches</Link>
 							</li>
 							<li>
-								<a href='#'>Mobiles</a>
+								<Link to='#'>Mobiles</Link>
 							</li>
 							<li>
-								<a href='#'>Tablets</a>
+								<Link to='#'>TLinkblets</Link>
 							</li>
 							<li>
-								<a href='#'>Audio</a>
+								<Link to='#'>Audio</Link>
 							</li>
 							<li>
-								<a href='#'>Drones</a>
+								<Link to='#'>Drones</Link>
 							</li>
 						</ul>
 					</div>
@@ -44,38 +46,20 @@ const Footer = () => {
 						<h5>Get Updates</h5>
 						<div className='d-flex subscribe'>
 							<input type='text' className='form-control' />
-							<button className='btn btn-warning'>
-								Subscribe
-							</button>
+							<button className='btn btn-warning'>Subscribe</button>
 						</div>
 						<div className='mt-2'>
-							<div
-								className='btn-group me-2 social-icons'
-								role='group'
-								aria-label='First group'
-							>
-								<button
-									type='button'
-									className='btn btn-secondary mx-1 d-flex flex-column justify-content-center align-items-center'
-								>
+							<div className='btn-group me-2 social-icons' role='group' aria-label='First group'>
+								<button type='button' className='btn btn-secondary mx-1 d-flex flex-column justify-content-center align-items-center'>
 									<i className='bi bi-facebook'></i>
 								</button>
-								<button
-									type='button'
-									className='btn btn-secondary mx-1 d-flex flex-column justify-content-center align-items-center'
-								>
+								<button type='button' className='btn btn-secondary mx-1 d-flex flex-column justify-content-center align-items-center'>
 									<i className='bi bi-instagram'></i>
 								</button>
-								<button
-									type='button'
-									className='btn btn-secondary mx-1 d-flex flex-column justify-content-center align-items-center'
-								>
+								<button type='button' className='btn btn-secondary mx-1 d-flex flex-column justify-content-center align-items-center'>
 									<i className='bi bi-twitter'></i>
 								</button>
-								<button
-									type='button'
-									className='btn btn-secondary mx-1 d-flex flex-column justify-content-center align-items-center'
-								>
+								<button type='button' className='btn btn-secondary mx-1 d-flex flex-column justify-content-center align-items-center'>
 									<i className='bi bi-linkedin'></i>
 								</button>
 							</div>

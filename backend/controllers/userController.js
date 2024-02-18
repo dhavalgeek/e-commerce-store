@@ -85,7 +85,7 @@ const updateUserAddress = async (req, res) => {
 		const user = await User.findById(userId);
 
 		user.addresses.push(address);
-		const updated = await user.save();
+		await user.save();
 
 		return res.status(200).json({ message: 'User created successfully..', data: address });
 	} catch (error) {
